@@ -1,5 +1,8 @@
-package com.kadai9.user;
+package com.kadai10.user.service;
 
+import com.kadai10.user.entity.User;
+import com.kadai10.user.excepention.UserNotFoundException;
+import com.kadai10.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,5 +20,11 @@ public class UserService {
         if (user.isPresent()) {
             return user.get();
         } else throw new UserNotFoundException("userID:" + id + "not found");
+    }
+
+    public User insert(String name, String occupation) {
+        User user = User.createUser(name, occupation);
+        userMapper.insert(user);
+        return user;
     }
 }

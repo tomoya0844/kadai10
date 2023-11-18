@@ -1,5 +1,6 @@
-package com.kadai9.user;
+package com.kadai10.user.controller;
 
+import com.kadai10.user.excepention.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
