@@ -1,6 +1,7 @@
 # 404が返ってくる
 
-<img width="１２０７" alt="スクリーンショット 2023-11-19 10 34 27" src="https://github.com/tomoya0844/kadai10/assets/146510558/08819ac4-e811-4618-8e1d-9b6b7694c99f">
+## GET
+<img width="１２０７" alt="スクリーンショット 2023-11-19 10 45 44" src="https://github.com/tomoya0844/kadai10/assets/146510558/48a5653e-09b0-42df-a59a-72dd2eb6f981">
 
-  ## ポストマン
-<img width="1207" alt="スクリーンショット 2023-11-19 10 37 15" src="https://github.com/tomoya0844/kadai10/assets/146510558/a12b0938-d57c-418d-9f49-1dfa9f27651f">
+## POST
+<img width="1207" alt="スクリーンショット 2023-11-19 10 46 26" src="https://github.com/tomoya0844/kadai10/assets/146510558/cbbd73eb-3c24-4b47-a625-442d6f02f25d">
