@@ -1,9 +1,9 @@
 package com.kadai10.user.controller;
 
-import com.kadai10.user.UserResponse;
+import com.kadai10.user.controller.request.UserRequest;
+import com.kadai10.user.controller.response.UserResponse;
 import com.kadai10.user.entity.User;
 import com.kadai10.user.excepention.UserNotFoundException;
-import com.kadai10.user.request.UserRequest;
 import com.kadai10.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
