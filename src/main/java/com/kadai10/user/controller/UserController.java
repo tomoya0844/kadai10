@@ -39,7 +39,7 @@ public class UserController {
     public ResponseEntity<UserResponse> insert(@RequestBody @Valid UserRequest userRequest, UriComponentsBuilder uriBuilder) {
         User user = userService.insert(userRequest.getName(), userRequest.getOccupation());
         URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
-        UserResponse body = new UserResponse("user created");
+        UserResponse body = new UserResponse(user.getName() + "を登録しました");
         return ResponseEntity.created(location).body(body);
     }
 }
