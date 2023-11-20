@@ -5,6 +5,7 @@ import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,6 +14,11 @@ public class UserService {
 
     public UserService(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+
+    public List<User> findUsers() {
+        return userMapper.findAll();
     }
 
     public User findUser(int id) {
@@ -27,4 +33,5 @@ public class UserService {
         userMapper.insert(user);
         return user;
     }
+
 }
