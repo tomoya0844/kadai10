@@ -47,4 +47,3 @@ public class UserControllerAdvice {
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 }
-
