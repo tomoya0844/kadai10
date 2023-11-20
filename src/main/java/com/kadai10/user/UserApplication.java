@@ -1,4 +1,4 @@
-package com.kadai10.user.application;
+package com.kadai10.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,12 @@
+<!-- UserMapper.xml -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kadai10.user.mapper.UserMapper">
+    <!-- 他のSQLマッピング -->
+
+    <select id="getAllUsers" resultType="com.kadai10.user.model.User">
+        SELECT * FROM users ORDER BY id
+    </select>
+</mapper>
