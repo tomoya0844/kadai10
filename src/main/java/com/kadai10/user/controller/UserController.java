@@ -1,10 +1,17 @@
 package com.kadai10.user.controller;
 
+import com.kadai10.user.UserResponse;
 import com.kadai10.user.entity.User;
 import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.request.UserRequest;
 import com.kadai10.user.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -12,6 +19,11 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.findUsers();
     }
 
     @GetMapping("/users/{id}")
@@ -24,7 +36,10 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User insert(@RequestBody UserRequest userRequest) {
-        return userService.insert(userRequest.getName(), userRequest.getOccupation());
+    public ResponseEntity<UserResponse> insert(@RequestBody @Valid UserRequest userRequest, UriComponentsBuilder uriBuilder) {
+        User user = userService.insert(userRequest.getName(), userRequest.getOccupation());
+        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
+        UserResponse body = new UserResponse("user created");
+        return ResponseEntity.created(location).body(body);
     }
 }
