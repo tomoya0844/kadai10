@@ -1,7 +1,11 @@
 package com.kadai10.user.request;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UserRequest {
+    @NotNull(message = "入力してください")
     private String name;
+    @NotNull(message = "入力してください")
     private String occupation;
 
     public UserRequest(String name, String occupation) {
