@@ -6,9 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-
 import java.sql.SQLIntegrityConstraintViolationException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.ZonedDateTime;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ public class UserControllerAdvice {
                 "error", HttpStatus.NOT_FOUND.getReasonPhrase(),
                 "message", "指定されたリソースが見つかりません:",
                 "path", request.getRequestURI());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -33,7 +32,7 @@ public class UserControllerAdvice {
                 "error", HttpStatus.BAD_REQUEST.getReasonPhrase(),
                 "message", "入力してください",
                 "path", request.getRequestURI());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
@@ -44,6 +43,6 @@ public class UserControllerAdvice {
                 "error", HttpStatus.CONFLICT.getReasonPhrase(),
                 "message", e.getMessage() + "データが既に存在しています。新しいデータを追加できません。",
                 "path", request.getRequestURI());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 }
