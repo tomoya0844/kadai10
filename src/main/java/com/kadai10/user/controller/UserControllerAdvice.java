@@ -2,10 +2,12 @@ package com.kadai10.user.controller;
 
 import com.kadai10.user.excepention.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.ZonedDateTime;
@@ -15,7 +17,7 @@ import java.util.Map;
 public class UserControllerAdvice {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleUserNotFoundException(UserNotFoundException e, HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> handleUserNotFoundException(UserNotFoundException e, @NotNull HttpServletRequest request) {
         Map<String, String> body = Map.of(
                 "timestamp", ZonedDateTime.now().toString(),
                 "status", String.valueOf(HttpStatus.NOT_FOUND.value()),
