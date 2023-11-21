@@ -11,11 +11,11 @@ public class User {
         this.occupation = occupation;
     }
 
-    public static User createUser(String name, String email) {
-        return new User(null, name, email);
+    public static User createUser(String name, String occupation) {
+        return new User(null, name, occupation);
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -25,5 +25,13 @@ public class User {
 
     public String getOccupation() {
         return occupation;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 }
