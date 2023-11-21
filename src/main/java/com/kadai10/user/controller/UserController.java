@@ -1,5 +1,6 @@
 package com.kadai10.user.controller;
 
+import com.kadai10.user.UserUpdateRequest;
 import com.kadai10.user.controller.request.UserRequest;
 import com.kadai10.user.controller.response.UserResponse;
 import com.kadai10.user.entity.User;
@@ -41,5 +42,21 @@ public class UserController {
         URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
         UserResponse body = new UserResponse(user.getName() + "を登録しました");
         return ResponseEntity.created(location).body(body);
+
+    }
+
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody UserUpdateRequest updateRequest) {
+        User user = userService.findById(id);
+        
+        if (updateRequest.getName() != null) {
+            user.setName(updateRequest.getName());
+        }
+
+        if (updateRequest.getOccupation() != null) {
+            user.setOccupation(updateRequest.getOccupation());
+        }
+        userService.updateUser(user);
+        return ResponseEntity.ok("更新しました");
     }
 }
