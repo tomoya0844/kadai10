@@ -36,8 +36,9 @@ public class UserService {
     public void updateUser(User user) {
         userMapper.updateUser(user);
         Optional<User> user = userMapper.findById(userId);
-    return user.isPresent();
-}
+        if (user.isPresent()) {
+            return user.get();
+        } else throw new UserNotFoundException("指定されたユーザーIDが存在しません。");
     }
 
     public User findById(int id) {
