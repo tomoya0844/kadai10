@@ -48,14 +48,6 @@ public class UserController {
     @PatchMapping("/users/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody UserUpdateRequest updateRequest) {
         User user = userService.findById(id);
-        
-        if (updateRequest.getName() != null) {
-            user.setName(updateRequest.getName());
-        }
-
-        if (updateRequest.getOccupation() != null) {
-            user.setOccupation(updateRequest.getOccupation());
-        }
         userService.updateUser(user);
         return ResponseEntity.ok("更新しました");
     }
