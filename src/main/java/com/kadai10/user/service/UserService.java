@@ -35,6 +35,9 @@ public class UserService {
 
     public void updateUser(User user) {
         userMapper.updateUser(user);
+        Optional<User> user = userMapper.findById(userId);
+    return user.isPresent();
+}
     }
 
     public User findById(int id) {
