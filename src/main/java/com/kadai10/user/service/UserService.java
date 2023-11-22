@@ -1,9 +1,15 @@
 package com.kadai10.user.service;
 
+import com.kadai10.user.UserUpdateRequest;
 import com.kadai10.user.entity.User;
 import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
+import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,5 +49,22 @@ public class UserService {
 
     public User findById(int id) {
         return findUser(id);
+    }
+    public void updateUser(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
+        if (id == null && updateRequest.getName() == null && updateRequest.getOccupation() == null) {
+            throw new MethodArgumentNotValidException((MethodParameter) null, createBindingResult("ID、名前、職業のいずれかが指定されていません。"));
+        }
+
+        User user = findById(id);
+
+        if (updateRequest.getName() != null) {
+            user.setName(updateRequest.getName());
+        }
+
+        if (updateRequest.getOccupation() != null) {
+            user.setOccupation(updateRequest.getOccupation());
+        }
+
+        userMapper.update(user);
     }
 }
