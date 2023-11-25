@@ -26,11 +26,29 @@ public class UserService {
         return userMapper.findAll();
     }
 
-    public User findUser(int id) {
-        Optional<User> user = this.userMapper.findById(id);
-        if (user.isPresent()) {
-            return user.get();
-        } else throw new UserNotFoundException("userID:" + id + "not found");
+   public User findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
+    if (id == null && (updateRequest.getName() == null || updateRequest.getOccupation() == null)) {
+        throw new MethodArgumentNotValidException((MethodParameter) null, createBindingResult("ID、名前、職業のいずれかが指定されていません。"));
+    }
+
+    Optional<User> user = userMapper.findById(id);
+    
+    if (user.isPresent()) {
+        User foundUser = user.get();
+        
+        if (updateRequest.getName() != null) {
+            foundUser.setName(updateRequest.getName());
+        }
+
+        if (updateRequest.getOccupation() != null) {
+            foundUser.setOccupation(updateRequest.getOccupation());
+        }
+
+        userMapper.updateUser(foundUser);
+
+        return foundUser;
+    } else {
+        throw new UserNotFoundException("userID:" + id + " not found");
     }
 
     public User insert(String name, String occupation) {
@@ -39,32 +57,4 @@ public class UserService {
         return user;
     }
 
-    public void updateUser(User user) {
-        userMapper.updateUser(user);
-        Optional<User> user = userMapper.findById(userId);
-        if (user.isPresent()) {
-            return user.get();
-        } else throw new UserNotFoundException("指定されたユーザーIDが存在しません。");
-    }
-
-    public User findById(int id) {
-        return findUser(id);
-    }
-    public void updateUser(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
-        if (id == null && updateRequest.getName() == null && updateRequest.getOccupation() == null) {
-            throw new MethodArgumentNotValidException((MethodParameter) null, createBindingResult("ID、名前、職業のいずれかが指定されていません。"));
-        }
-
-        User user = findById(id);
-
-        if (updateRequest.getName() != null) {
-            user.setName(updateRequest.getName());
-        }
-
-        if (updateRequest.getOccupation() != null) {
-            user.setOccupation(updateRequest.getOccupation());
-        }
-
-        userMapper.update(user);
-    }
-}
+  
