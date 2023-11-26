@@ -32,7 +32,6 @@ public class UserService {
     }
 
     Optional<User> user = userMapper.findById(id);
-    }
     
     if (user.isPresent()) {
         User foundUser = user.get();
