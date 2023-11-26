@@ -7,7 +7,9 @@ import com.kadai10.user.entity.User;
 import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -18,6 +20,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -46,9 +49,8 @@ public class UserController {
     }
 
     @PatchMapping("/users/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody UserUpdateRequest updateRequest) {
-        User user = userService.findById(id);
-        userService.updateUser(user);
+    public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
+        userService.updateUser(userService.findById(id, updateRequest));
         return ResponseEntity.ok("更新しました");
     }
 }
