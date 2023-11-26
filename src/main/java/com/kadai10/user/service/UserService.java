@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,17 @@ public class UserService {
 
     public List<User> findUsers() {
         return userMapper.findAll();
+
     }
+
+    public User findUser(Integer id) {
+        Optional<User> user = this.userMapper.findById(id);
+        if (user.isPresent()) {
+            return user.get();
+        } else throw new UserNotFoundException("userID:" + id + "not found");
+    }
+
+
     public User insert(String name, String occupation) {
         User user = User.createUser(name, occupation);
         userMapper.insert(user);
@@ -37,35 +48,35 @@ public class UserService {
         updatedUser.orElseThrow(() -> new UserNotFoundException("指定されたユーザーIDが存在しません。"));
     }
 
-   public User findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
-    if (id == null && (updateRequest.getName() == null || updateRequest.getOccupation() == null)) {
-        throw new MethodArgumentNotValidException((MethodParameter) null, createBindingResult("ID、名前、職業のいずれかが指定されていません。"));
-    }
 
-    Optional<User> user = userMapper.findById(id);
-    
-    if (user.isPresent()) {
-        User foundUser = user.get();
-        
-        if (updateRequest.getName() != null) {
-            foundUser.setName(updateRequest.getName());
+    public User findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
+        if (id == null || (updateRequest.getName() == null && updateRequest.getOccupation() == null)) {
+            throw new MethodArgumentNotValidException((MethodParameter) null, createBindingResult("ID、名前、職業のいずれかが指定されていません。"));
         }
 
-        if (updateRequest.getOccupation() != null) {
-            foundUser.setOccupation(updateRequest.getOccupation());
+        Optional<User> user = userMapper.findById(id);
+        if (user.isPresent()) {
+            User foundUser = user.get();
+
+            if (updateRequest.getName() != null) {
+                foundUser.setName(updateRequest.getName());
+            }
+
+            if (updateRequest.getOccupation() != null) {
+                foundUser.setOccupation(updateRequest.getOccupation());
+            }
+
+            userMapper.updateUser(foundUser);
+
+            return foundUser;
+        } else {
+            throw new UserNotFoundException("userID:" + id + " not found");
         }
-
-        userMapper.updateUser(foundUser);
-
-        return foundUser;
-    } else {
-        throw new UserNotFoundException("userID:" + id + " not found");
     }
 
-    public User insert(String name, String occupation) {
-        User user = User.createUser(name, occupation);
-        userMapper.insert(user);
-        return user;
+    private BindingResult createBindingResult(String message) {
+        BindingResult bindingResult = new BeanPropertyBindingResult(Collections.emptyMap(), "target");
+        bindingResult.addError(new FieldError("target", "fieldName", message));
+        return bindingResult;
     }
-
-  
+}
