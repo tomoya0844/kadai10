@@ -25,6 +25,17 @@ public class UserService {
     public List<User> findUsers() {
         return userMapper.findAll();
     }
+    public User insert(String name, String occupation) {
+        User user = User.createUser(name, occupation);
+        userMapper.insert(user);
+        return user;
+    }
+
+    public void updateUser(User user) throws UserNotFoundException {
+        userMapper.updateUser(user);
+        Optional<User> updatedUser = userMapper.findById(user.getId());
+        updatedUser.orElseThrow(() -> new UserNotFoundException("指定されたユーザーIDが存在しません。"));
+    }
 
    public User findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
     if (id == null && (updateRequest.getName() == null || updateRequest.getOccupation() == null)) {
