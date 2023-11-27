@@ -8,12 +8,15 @@ public class UserUpdateRequest {
     this.name = name;
     this.occupation = occupation;
   }
+  
   public void setName(String name) {
     this.name = name;
   }
+  
   public void setOccupation(String occupation) {
     this.occupation = occupation;
   }
+  
   public String getName() {
     return name;
   }
