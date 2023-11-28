@@ -1,41 +1,57 @@
-package com.kadai10.user.entity;
+package com.kadai10.user.service;
 
-public class User {
-    private Integer id;
-    private String name;
-    private String occupation;
 
-    public User(Integer id, String name, String occupation) {
-        this.id = id;
-        this.name = name;
-        this.occupation = occupation;
+import com.kadai10.user.UserUpdateRequest;
+import com.kadai10.user.entity.User;
+import com.kadai10.user.excepention.UserNotFoundException;
+import com.kadai10.user.mapper.UserMapper;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class UserService {
+    private final UserMapper userMapper;
+
+    public UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 
-    public static User createUser(String name, String occupation) {
-        return new User(null, name, occupation);
+    public List<User> findUsers() {
+        return userMapper.findAll();
+
     }
 
-    public static User updateUser(Integer id, String name, String occupation) {
-        return new User(id, name, occupation);
+    public User findUser(Integer id) {
+        Optional<User> user = this.userMapper.findById(id);
+        if (user.isPresent()) {
+            return user.get();
+        } else throw new UserNotFoundException("userID:" + id + "not found");
     }
 
-    public Integer getId() {
-        return id;
+
+    public User insert(String name, String occupation) {
+        User user = User.createUser(name, occupation);
+        userMapper.insert(user);
+        return user;
     }
 
-    public String getName() {
-        return name;
+    public User updateUser(Integer id, String name, String occupation) {
+        User user = User.updateUser(id, name, occupation);
+        userMapper.updateUser(user);
+        return user;
     }
 
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
+    public Integer findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
+        User foundUser = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
+        if (updateRequest.getName() != null) {
+            foundUser.setName(updateRequest.getName());
+        }
+        if (updateRequest.getOccupation() != null) {
+            foundUser.setOccupation(updateRequest.getOccupation());
+        }
+        return foundUser.getId();
     }
 }
