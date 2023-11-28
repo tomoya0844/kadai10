@@ -1,14 +1,11 @@
 package com.kadai10.user.service;
 
+
 import com.kadai10.user.UserUpdateRequest;
 import com.kadai10.user.entity.User;
 import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
@@ -41,20 +38,13 @@ public class UserService {
         return user;
     }
 
-    public void updateUser(User user) throws UserNotFoundException {
+    public User updateUser(Integer id, String name, String occupation) {
+        User user = User.updateUser(id, name, occupation);
         userMapper.updateUser(user);
-        Optional<User> updatedUser = userMapper.findById(user.getId());
-        updatedUser.orElseThrow(() -> new UserNotFoundException("指定されたユーザーIDが存在しません。"));
+        return user;
     }
 
-    @Valid
-    @NotNull(message = "IDが指定されていません")
-    public User findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
-        if (id == null || (updateRequest.getName() == null && updateRequest.getOccupation() == null)) {
-            throw new MethodArgumentNotValidException((MethodParameter) null, (BindingResult) findUsers());
-        }
-
-
+    public Integer findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
         User foundUser = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
         if (updateRequest.getName() != null) {
             foundUser.setName(updateRequest.getName());
@@ -62,6 +52,6 @@ public class UserService {
         if (updateRequest.getOccupation() != null) {
             foundUser.setOccupation(updateRequest.getOccupation());
         }
-        return foundUser;
+        return foundUser.getId();
     }
 }
