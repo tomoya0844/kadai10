@@ -23,6 +23,4 @@ public interface UserMapper {
 
     @Update("UPDATE users SET name = #{name}, occupation = #{occupation} WHERE id = #{id}")
     void updateUser(User user);
-
-
 }
