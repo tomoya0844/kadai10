@@ -3,20 +3,20 @@ package com.kadai10.user;
 
 public class UserUpdateRequest {
 
-    String name;
+  String name;
 
-    String occupation;
+  String occupation;
 
-    public UserUpdateRequest(String name, String occupation) {
-        this.name = name;
-        this.occupation = occupation;
-    }
+  public UserUpdateRequest(String name, String occupation) {
+    this.name = name;
+    this.occupation = occupation;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setOccupation(String occupation) {
+  public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
 
