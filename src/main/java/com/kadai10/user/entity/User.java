@@ -33,10 +33,10 @@ public class User {
     }
 
   public void setName(String name) {
-    this.name = name;
-    }
-
+      this.name = name;
+  }
+    
   public void setOccupation(String occupation) {
-        this.occupation = occupation;
+      this.occupation = occupation;
     }
 }
