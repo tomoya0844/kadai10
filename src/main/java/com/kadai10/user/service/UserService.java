@@ -38,22 +38,15 @@ public class UserService {
         return user;
     }
 
-    public User updateUser(Integer id, String name, String occupation) {
-        User user = User.updateUser(id, name, occupation);
-        userMapper.updateUser(user);
-        return user;
-    }
-
-    public Integer findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
-        User foundUser = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
+    public User updateUser(Integer id, UserUpdateRequest updateRequest) {
+        User user = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
         if (updateRequest.getName() != null) {
-            foundUser.setName(updateRequest.getName());
+            user.setName(updateRequest.getName());
         }
         if (updateRequest.getOccupation() != null) {
-            foundUser.setOccupation(updateRequest.getOccupation());
+            user.setOccupation(updateRequest.getOccupation());
         }
-
-        userMapper.updateUser(foundUser);
-        return foundUser.getId();
+        userMapper.updateUser(user);
+        return user;
     }
 }

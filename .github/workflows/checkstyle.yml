@@ -17,20 +17,20 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: 'tearing'
       - name: Run check style
-        uses: nikitasavinov/checkstyle-action@master
+        uses: avitaminosis/checkstyle-action@master
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: 'github-pr-check'
-          tool_name: 'reviewdog'
+          tool_name: 'review dog'
           checkstyle_config: 'config/checkstyle/checkstyle.xml'
           workdir: 'src/main'
           level: error
 
     #- name: Discord Notification
-    #  uses: sarisia/actions-status-discord@v1
+    #  uses: sari/actions-status-discord@v1
     #  if: always()
     #  with:
     #    webhook: ${{ secrets.DISCORD_WEBHOOK }}

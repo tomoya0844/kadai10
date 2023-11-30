@@ -15,11 +15,6 @@ public class User {
         return new User(null, name, occupation);
     }
 
-    public static User updateUser(Integer id, String name, String occupation) {
-        return new User(null, name, occupation);
-
-    }
-
     public Integer getId() {
         return id;
     }
