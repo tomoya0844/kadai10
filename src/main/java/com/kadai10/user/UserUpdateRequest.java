@@ -17,14 +17,14 @@ public class UserUpdateRequest {
   }
 
   public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
+    this.occupation = occupation;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getOccupation() {
-        return occupation;
-    }
+  public String getOccupation() {
+    return occupation;
+  }
 }
