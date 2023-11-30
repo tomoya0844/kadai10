@@ -50,7 +50,7 @@ public class UserController {
 
     @PatchMapping("/users/{id}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable @Valid Integer id, @RequestBody UserUpdateRequest updateRequest, UriComponentsBuilder uriBuilder) throws MethodArgumentNotValidException {
-        User user = userService.updateUser(userService.findById(id, updateRequest), updateRequest.getName(), updateRequest.getOccupation());
+        User user = userService.updateUser(id, updateRequest);
         URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
         UserResponse body = new UserResponse(user.getName() + "を更新しました");
         return ResponseEntity.created(location).body(body);
