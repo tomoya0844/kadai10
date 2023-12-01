@@ -37,13 +37,13 @@ public class UserService {
         return user;
     }
 
-    public User updateUser(Integer id, UserUpdateRequest updateRequest) {
+   public User updateUser(Integer id, String name, String occupation) {
         User user = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
-        if (updateRequest.getName() != null) {
-            user.setName(updateRequest.getName());
+        if (UserUpdateRequest.getName() != null) {
+            user.setName(UserUpdateRequest.getName());
         }
-        if (updateRequest.getOccupation() != null) {
-            user.setOccupation(updateRequest.getOccupation());
+        if (UserUpdateRequest.getOccupation() != null) {
+            user.setOccupation(UserUpdateRequest.getOccupation());
         }
         userMapper.updateUser(user);
         return user;
