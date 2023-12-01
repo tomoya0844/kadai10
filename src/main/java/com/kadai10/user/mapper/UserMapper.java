@@ -21,6 +21,9 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(User user);
 
-  @Update("UPDATE users SET name = #{name}, occupation = #{occupation} WHERE id = #{id}")
+    @Update("UPDATE users SET name = #{name}, occupation = #{occupation} WHERE id = #{id}")
     void updateUser(User user);
+
+    @Delete("DELETE FROM users WHERE id = #{id}")
+    void deleteUser(User id);
 }

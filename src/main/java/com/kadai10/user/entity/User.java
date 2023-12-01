@@ -15,6 +15,10 @@ public class User {
         return new User(null, name, occupation);
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -31,3 +35,4 @@ public class User {
         this.occupation = occupation;
     }
 }
+

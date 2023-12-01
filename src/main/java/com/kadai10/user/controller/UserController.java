@@ -1,6 +1,6 @@
 package com.kadai10.user.controller;
 
-import com.kadai10.user.UserUpdateRequest;
+import com.kadai10.user.controller.request.UserUpdateRequest;
 import com.kadai10.user.controller.request.UserRequest;
 import com.kadai10.user.controller.response.UserResponse;
 import com.kadai10.user.entity.User;
@@ -9,7 +9,6 @@ import com.kadai10.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,7 +18,6 @@ import java.util.List;
 @RestController
 public class UserController {
     private final UserService userService;
-
 
     @Autowired
     public UserController(UserService userService) {
@@ -43,19 +41,25 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<UserResponse> insert(@RequestBody @Valid UserRequest userRequest, UriComponentsBuilder uriBuilder) {
         User user = userService.insert(userRequest.getName(), userRequest.getOccupation());
-        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getName()).toUri();
+        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
         UserResponse body = new UserResponse(user.getName() + "を登録しました");
         return ResponseEntity.created(location).body(body);
 
     }
 
-
     @PatchMapping("/users/{id}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable @Valid Integer id, @RequestBody UserUpdateRequest updateRequest, UriComponentsBuilder uriBuilder) {
         User user = userService.updateUser(id, UserUpdateRequest.getName(), UserUpdateRequest.getOccupation());
-
-        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getName()).toUri();
+        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
         UserResponse body = new UserResponse(user.getName() + "を更新しました");
+        return ResponseEntity.created(location).body(body);
+    }
+
+    @DeleteMapping("/users/delete/{id}")
+    public ResponseEntity<UserResponse> deleteUser(@PathVariable @Valid Integer id, UriComponentsBuilder uriBuilder) {
+        User user = userService.deleteUser(id);
+        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
+        UserResponse body = new UserResponse(user.getName() + "を削除しました");
         return ResponseEntity.created(location).body(body);
     }
 }
