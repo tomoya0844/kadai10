@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS movies;
 
 CREATE TABLE users (
   id int unsigned AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  occupation VARCHAR(100) NOT NULL UNIQUE,
+  name VARCHAR(255) NOT NULL,
+  occupation VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY(id)
 );
 

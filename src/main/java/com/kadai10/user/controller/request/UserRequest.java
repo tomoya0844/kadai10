@@ -1,4 +1,4 @@
-package com.kadai10.user.request;
+package com.kadai10.user.controller.request;
 
 public class UserRequest {
     private String name;
