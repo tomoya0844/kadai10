@@ -11,15 +11,9 @@ public class User {
         this.occupation = occupation;
     }
 
-  public static User createUser(String name, String occupation) {
-    return new User(null, name, occupation);
+    public static User createUser(String name, String occupation) {
+        return new User(null, name, occupation);
     }
-
-
-  public static User updateUser(Integer id, String name, String occupation) {
-    return new User(null, name, occupation);
-
-  }
 
     public String getName() {
         return name;
@@ -29,11 +23,11 @@ public class User {
         return occupation;
     }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-    
-  public void setOccupation(String occupation) {
-    this.occupation = occupation;
-　  }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
 }

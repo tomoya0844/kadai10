@@ -20,7 +20,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-  
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -43,18 +43,18 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<UserResponse> insert(@RequestBody @Valid UserRequest userRequest, UriComponentsBuilder uriBuilder) {
         User user = userService.insert(userRequest.getName(), userRequest.getOccupation());
-        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
+        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getName()).toUri();
         UserResponse body = new UserResponse(user.getName() + "を登録しました");
         return ResponseEntity.created(location).body(body);
 
-  }
+    }
 
 
-     @PatchMapping("/users/{id}")
+    @PatchMapping("/users/{id}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable @Valid Integer id, @RequestBody UserUpdateRequest updateRequest, UriComponentsBuilder uriBuilder) {
         User user = userService.updateUser(id, UserUpdateRequest.getName(), UserUpdateRequest.getOccupation());
 
-        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
+        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getName()).toUri();
         UserResponse body = new UserResponse(user.getName() + "を更新しました");
         return ResponseEntity.created(location).body(body);
     }
