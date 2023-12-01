@@ -53,12 +53,6 @@ public class UserService {
 
     public User deleteUser(Integer id) {
         User user = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
-        if (UserDeleteRequest.getName() != null) {
-            user.setName(UserDeleteRequest.getName());
-        }
-        if (UserDeleteRequest.getOccupation() != null) {
-            user.setOccupation(UserDeleteRequest.getOccupation());
-        }
         userMapper.deleteUser(user);
         return user;
     }
