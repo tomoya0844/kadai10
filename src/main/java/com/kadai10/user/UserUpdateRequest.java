@@ -2,29 +2,42 @@ package com.kadai10.user;
 
 
 public class UserUpdateRequest {
+    Integer id;
 
-  String name;
+    static String name;
 
-  String occupation;
+    static String occupation;
 
-  public UserUpdateRequest(String name, String occupation) {
-    this.name = name;
-    this.occupation = occupation;
-  }
+    public UserUpdateRequest(Integer id, String name, String occupation) {
+        this.id = id;
+        this.name = name;
+        this.occupation = occupation;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setOccupation(String occupation) {
-    this.occupation = occupation;
-  }
+    public static String getName() {
 
-  public String getName() {
-    return name;
-  }
+        return name;
+    }
 
-  public String getOccupation() {
-    return occupation;
-  }
+    public static String getOccupation() {
+
+        return occupation;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
 }
