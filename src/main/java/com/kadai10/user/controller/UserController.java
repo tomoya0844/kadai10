@@ -1,6 +1,5 @@
 package com.kadai10.user.controller;
 
-import com.kadai10.user.controller.request.UserDeleteRequest;
 import com.kadai10.user.controller.request.UserUpdateRequest;
 import com.kadai10.user.controller.request.UserRequest;
 import com.kadai10.user.controller.response.UserResponse;
@@ -9,7 +8,6 @@ import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
