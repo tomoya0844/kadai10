@@ -39,5 +39,3 @@ public class UserUpdateRequest {
     public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
-
-}
