@@ -6,7 +6,6 @@ import com.kadai10.user.entity.User;
 import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,20 +37,15 @@ public class UserService {
         return user;
     }
 
-    public User updateUser(Integer id, String name, String occupation) {
-        User user = User.updateUser(id, name, occupation);
+   public User updateUser(Integer id, String name, String occupation) {
+        User user = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
+        if (UserUpdateRequest.getName() != null) {
+            user.setName(UserUpdateRequest.getName());
+        }
+        if (UserUpdateRequest.getOccupation() != null) {
+            user.setOccupation(UserUpdateRequest.getOccupation());
+        }
         userMapper.updateUser(user);
         return user;
-    }
-
-    public Integer findById(Integer id, UserUpdateRequest updateRequest) throws MethodArgumentNotValidException {
-        User foundUser = userMapper.findById(id).orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
-        if (updateRequest.getName() != null) {
-            foundUser.setName(updateRequest.getName());
-        }
-        if (updateRequest.getOccupation() != null) {
-            foundUser.setOccupation(updateRequest.getOccupation());
-        }
-        return foundUser.getId();
     }
 }
