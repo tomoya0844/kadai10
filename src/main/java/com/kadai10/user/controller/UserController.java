@@ -56,10 +56,10 @@ public class UserController {
     }
 
     @DeleteMapping("/users/delete/{id}")
-    public ResponseEntity<UserResponse> deleteUser(@PathVariable @Valid Integer id, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserResponse> deleteUser(@PathVariable @Valid Integer id) {
         User user = userService.deleteUser(id);
-        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
-        UserResponse body = new UserResponse(user.getName() + "を削除しました");
-        return ResponseEntity.created(location).body(body);
+        UserResponse response = new UserResponse(user.getName() + "を削除しました");
+        return ResponseEntity.ok(response);
     }
+
 }
