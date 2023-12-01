@@ -1,12 +1,12 @@
-package com.kadai10.user;
+package com.kadai10.user.controller.request;
 
 
 public class UserUpdateRequest {
     Integer id;
 
-    String name;
+    static String name;
 
-    String occupation;
+    static String occupation;
 
     public UserUpdateRequest(Integer id, String name, String occupation) {
         this.id = id;
@@ -18,12 +18,12 @@ public class UserUpdateRequest {
         return id;
     }
 
-    public String getName() {
+    public static String getName() {
 
         return name;
     }
 
-    public String getOccupation() {
+    public static String getOccupation() {
 
         return occupation;
     }

@@ -23,4 +23,7 @@ public interface UserMapper {
 
     @Update("UPDATE users SET name = #{name}, occupation = #{occupation} WHERE id = #{id}")
     void updateUser(User user);
+
+    @Delete("DELETE FROM users WHERE id = #{id}")
+    void deleteUser(User id);
 }
