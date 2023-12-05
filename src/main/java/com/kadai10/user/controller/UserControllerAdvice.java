@@ -15,31 +15,52 @@ import java.util.Map;
 
 @ControllerAdvice
 public class UserControllerAdvice {
-
+    /**
+     * ユーザーが見つからない場合の例外ハンドリングメソッド.
+     *
+     * @param e       ユーザーが見つからない例外
+     * @param request HTTPリクエスト
+     * @return エラーレスポンス
+     */
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleUserNotFoundException(UserNotFoundException e, @NotNull HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> handleUserNotFoundException(final UserNotFoundException e, final @NotNull HttpServletRequest request) {
         Map<String, String> body = Map.of(
                 "timestamp", ZonedDateTime.now().toString(),
                 "status", String.valueOf(HttpStatus.NOT_FOUND.value()),
                 "error", HttpStatus.NOT_FOUND.getReasonPhrase(),
-                "message", "指定されたリソースが見つかりません",
+                "message", "指定されたユーザーが見つかりません",
                 "path", request.getRequestURI());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * 入力が不足している場合の例外ハンドリングメソッド.
+     *
+     * @param e       入力が不足している例外
+     * @param request HTTPリクエスト
+     * @return エラーレスポンス
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(
+            final MethodArgumentNotValidException e, final HttpServletRequest request) {
         Map<String, String> body = Map.of(
                 "timestamp", ZonedDateTime.now().toString(),
                 "status", String.valueOf(HttpStatus.BAD_REQUEST.value()),
                 "error", HttpStatus.BAD_REQUEST.getReasonPhrase(),
-                "message", "入力してください",
+                "message", "リクエストが不完全です。すべての必須フィールドに値を入力してください。",
                 "path", request.getRequestURI());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * 重複したデータが見つかった場合の例外ハンドリングメソッド.
+     *
+     * @param e       重複したデータが見つかった例外
+     * @param request HTTPリクエスト
+     * @return エラーレスポンス
+     */
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<Map<String, String>> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e, HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> handleSQLIntegrityConstraintViolationException(final SQLIntegrityConstraintViolationException e, final HttpServletRequest request) {
         Map<String, String> body = Map.of(
                 "timestamp", ZonedDateTime.now().toString(),
                 "status", String.valueOf(HttpStatus.CONFLICT.value()),
