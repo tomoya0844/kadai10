@@ -17,31 +17,32 @@ public class UserUpdateRequest {
     /**
      * ユーザー情報を更新するためのリクエストオブジェクト.
      *
-     * @param name       ユーザーの新しい名前
-     * @param occupation ユーザーの新しい職業
+     * @param newName       ユーザーの新しい名前
+     * @param newOccupation ユーザーの新しい職業
      */
-    public UserUpdateRequest(final String name, final String occupation) {
-        this.name = name;
-        this.occupation = occupation;
+    public UserUpdateRequest(final String newName, final String newOccupation) {
+
+        name = newName;
+        occupation = newOccupation;
     }
 
     /**
      * ユーザーの名前を設定するメソッド.
      *
-     * @param name ユーザーの新しい名前
+     * @param newName ユーザーの新しい名前
      */
-    public void setName(final String name) {
-        this.name = name;
+    public void setName(final String newName) {
+        name = newName;
     }
 
     /**
      * ユーザーの職業を設定するメソッド.
      *
-     * @param occupation ユーザーの新しい職業
+     * @param newOccupation ユーザーの新しい職業
      */
 
-    public void setOccupation(final String occupation) {
-        this.occupation = occupation;
+    public void setOccupation(final String newOccupation) {
+        occupation = newOccupation;
     }
 
     /**
