@@ -30,5 +30,5 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 checkstyle {
-    toolVersion = '10.3.3'
+    toolVersion = '10.12.5'
 }
