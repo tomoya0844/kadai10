@@ -22,7 +22,7 @@ public class User {
      * @param name       ユーザーの名前
      * @param occupation ユーザーの職業
      */
-    public User(final Integer id, final String name, final String occupation) {
+  public User(final Integer id, final String name, final String occupation) {
         this.id = id;
         this.name = name;
         this.occupation = occupation;
@@ -35,8 +35,8 @@ public class User {
      * @param occupation ユーザーの職業
      * @return 新しいユーザーオブジェクト
      */
-    public static User createUser(final String name, final String occupation) {
-        return new User(null, name, occupation);
+  public static User createUser(final String name, final String occupation) {
+    return new User(null, name, occupation);
     }
 
     /**
@@ -44,8 +44,8 @@ public class User {
      *
      * @return ユーザーの ID
      */
-    public Integer getId() {
-        return id;
+  public Integer getId() {
+    return id;
     }
 
     /**
@@ -72,16 +72,16 @@ public class User {
      *
      * @param name 設定するユーザーの名前
      */
-    public void setName(final String name) {
-        this.name = name;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
     /**
      * ユーザーの職業を設置するメソッド.
      *
      * @param occupation 設定するユーザーの職業
      */
-    public void setOccupation(final String occupation) {
+  public void setOccupation(final String occupation) {
         this.occupation = occupation;
     }
 }
