@@ -1,27 +1,29 @@
 package com.kadai10.user.controller.response;
 
+@SuppressWarnings("checkstyle:MissingJavadocType")
 public class UserResponse {
-    /**
-     * メッセージを保持するプライベート変数です.
-     */
-    private String message;
 
-    /**
-     * メッセージを取得します.
-     *
-     * @return メッセージ
-     */
+  /**
+   * メッセージを保持するプライベート変数です.
+   */
+  private final String message;
 
-    public String getMessage() {
-        return message;
-    }
+  /**
+   * ユーザーレスポンスを作成するためのコンストラクタです.
+   *
+   * @param message メッセージ
+   */
+  public UserResponse(final String message) {
+    this.message = message;
+  }
 
-    /**
-     * ユーザーレスポンスを作成するためのコンストラクタです.
-     *
-     * @param message メッセージ
-     */
-    public UserResponse(final String message) {
-        this.message = message;
-    }
+  /**
+   * メッセージを取得します.
+   *
+   * @return メッセージ
+   */
+
+  public String getMessage() {
+    return message;
+  }
 }
