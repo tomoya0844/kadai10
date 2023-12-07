@@ -1,6 +1,8 @@
 package com.kadai10.user.entity;
 
-@SuppressWarnings("checkstyle:MissingJavadocType")
+/**
+ * アプリケーション内で扱うユーザー情報を表現するクラスです. ユーザーの識別子、名前、メールアドレスなどの属性が含まれます。
+ */
 public class User {
 
   /**

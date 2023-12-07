@@ -10,26 +10,33 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-
-@SuppressWarnings({"checkstyle:MissingJavadocType", "checkstyle:SummaryJavadoc"})
+/**
+ * ユーザーエンティティとデータベースの間でデータの変換を担当するマッパーインターフェースです. ユーザーエンティティのデータベースへの保存や、データベースからの取得などの操作が含まれます。
+ */
 @Mapper
 public interface UserMapper {
-  //全件取得
 
   /**
-   * @return 全てのユーザーを取得
+   * ユーザを全て取得する.
+   *
+   * @return 全てのユーザーのリスト
    */
   @Select("SELECT * FROM users")
   List<User> findAll();
 
   /**
+   * 指定されたIDに対応するユーザーを取得する.
+   *
    * @param id 取得したいユーザーのid
    * @return 指定されたIDに対応するユーザーを返す。存在しない場合は空のOptionalを返す。
    */
   @Select("SELECT * FROM users WHERE id = #{id}")
   Optional<User> findById(int id);
 
+
   /**
+   * 指定された職業に対応するユーザーを取得する.
+   *
    * @param occupation 取得したいユーザーの職業
    * @return 指定された職業に対応するユーザーを返す。存在しない場合は空のOptionalを返す。
    */

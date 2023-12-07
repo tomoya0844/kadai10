@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@SuppressWarnings("checkstyle:MissingJavadocType")
+/**
+ * ユーザー関連のHTTPリクエストに対するハンドラーを提供するコントローラークラスです. ユーザー情報の取得、登録、更新、削除などの操作を処理します。
+ * エンドポイントを提供し、外部からのユーザー関連の操作を可能にします。
+ */
 @RestController
 public class UserController {
 

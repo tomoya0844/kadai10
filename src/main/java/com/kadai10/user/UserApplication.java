@@ -1,11 +1,10 @@
 package com.kadai10.user;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-@SuppressWarnings("checkstyle:MissingJavadocType")
-@SpringBootApplication
+/**
+ * ユーザーアプリケーションのエントリーポイントとなるクラスです. アプリケーション全体の初期化や実行フローの制御を担当します。
+ */
 public class UserApplication {
 
   /**

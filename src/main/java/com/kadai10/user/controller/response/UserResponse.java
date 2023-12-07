@@ -1,6 +1,6 @@
 package com.kadai10.user.controller.response;
 
-@SuppressWarnings("checkstyle:MissingJavadocType")
+
 public class UserResponse {
 
   /**

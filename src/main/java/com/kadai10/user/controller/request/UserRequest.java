@@ -1,14 +1,23 @@
 package com.kadai10.user.controller.request;
 
-@SuppressWarnings("checkstyle:MissingJavadocType")
+import lombok.Getter;
+
+/**
+ * ユーザー情報のリクエストを表すクラスです. このクラスは新しいユーザーの作成や既存のユーザー情報の更新などの要求を受け取ります。
+ */
+@Getter
 public class UserRequest {
 
   /**
-   * ユーザーの名前を表すフィールド.
+   * ユーザーの名前を表すフィールド. -- GETTER -- ユーザーの名前を取得する.
+   *
+   * @return ユーザーの名前
    */
   private final String name;
   /**
-   * ユーザーの職業を表すフィールド.
+   * ユーザーの職業を表すフィールド. -- GETTER -- ユーザーの職業を取得する.
+   *
+   * @return ユーザーの職業
    */
   private final String occupation;
 
@@ -23,21 +32,4 @@ public class UserRequest {
     this.occupation = occupation;
   }
 
-  /**
-   * ユーザーの名前を取得する.
-   *
-   * @return ユーザーの名前
-   */
-  public String getName() {
-    return name;
-  }
-
-  /**
-   * ユーザーの職業を取得する.
-   *
-   * @return ユーザーの職業
-   */
-  public String getOccupation() {
-    return occupation;
-  }
 }

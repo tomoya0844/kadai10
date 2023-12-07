@@ -1,7 +1,8 @@
 package com.kadai10.user.controller.request;
 
-
-@SuppressWarnings("checkstyle:MissingJavadocType")
+/**
+ * ユーザー情報の更新リクエストを表すクラスです. このクラスはユーザーの名前や職業などの更新が必要な情報を受け取ります。 ユーザー情報を更新する際に使用されます。
+ */
 public class UserUpdateRequest {
 
   /**
