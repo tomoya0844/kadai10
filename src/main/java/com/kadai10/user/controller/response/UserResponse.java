@@ -1,6 +1,8 @@
 package com.kadai10.user.controller.response;
 
-
+/**
+ * UserResponse クラスは、ユーザーのレスポンスを表現するためのクラスです.
+ */
 public class UserResponse {
 
   /**
@@ -27,3 +29,4 @@ public class UserResponse {
     return message;
   }
 }
+
