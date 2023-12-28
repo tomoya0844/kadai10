@@ -29,11 +29,4 @@ public class UserServiceTest {
     assertThat(actual).isEqualTo(new User(1, "yoshihito koyama", "java講師"));
     verify(userMapper).findById(1);
   }
-
-  public void 新しいユーザーを登録できること() {
-    doReturn(Optional.of(new User(2, "田中", "講師"))).when(userMapper).findById(2);
-    User actual = userService.findUser(2);
-    assertThat(actual).isEqualTo(new User(1, "田中", "講師"));
-    verify(userMapper).findById(2);
-  }
 }
