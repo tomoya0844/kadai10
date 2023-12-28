@@ -1,5 +1,7 @@
 package com.kadai10.user.entity;
 
+import java.util.Objects;
+
 /**
  * アプリケーション内で扱うユーザー情報を表現するクラスです. ユーザーの識別子、名前、メールアドレスなどの属性が含まれます。
  */
@@ -86,5 +88,23 @@ public class User {
    */
   public void setOccupation(final String occupation) {
     this.occupation = occupation;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    User user = (User) o;
+    return Objects.equals(id, user.id) && Objects.equals(name, user.name)
+        && Objects.equals(occupation, user.occupation);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, occupation);
   }
 }

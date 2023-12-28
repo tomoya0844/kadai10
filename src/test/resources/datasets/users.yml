@@ -1,0 +1,10 @@
+users:
+  - id: 1
+    name: "清⽔"
+    occupation: "SE"
+  - id: 2
+    name: "⼩⼭"
+    occupation: "YouTuber"
+  - id: 3
+    name: "⽥中"
+    occupation: "看護師"
