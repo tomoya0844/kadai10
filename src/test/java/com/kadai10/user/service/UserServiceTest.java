@@ -1,11 +1,14 @@
 package com.kadai10.user.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 import com.kadai10.user.entity.User;
+import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,9 +27,29 @@ public class UserServiceTest {
 
   @Test
   public void 存在するユーザーのIDを指定したときに正常にユーザーが返されること() {
-    doReturn(Optional.of(new User(1, "yoshihito koyama", "java講師"))).when(userMapper).findById(1);
-    User actual = userService.findUser(1);
-    assertThat(actual).isEqualTo(new User(1, "yoshihito koyama", "java講師"));
-    verify(userMapper).findById(1);
+    doReturn(Optional.of(new User(2, "北野", "介護士"))).when(userMapper).findById(2);
+    User actual = userService.findUser(2);
+    assertThat(actual).isEqualTo(new User(2, "北野", "介護士"));
+    verify(userMapper).findById(2);
+  }
+
+  @Test
+  public void 存在するユーザーを全て返されること() {
+    List<User> user = List.of(
+        new User(1, "小山", "警察官"),
+        new User(2, "北野", "介護士"),
+        new User(3, "田中", "看護師"));
+    doReturn(user).when(userMapper).findAll();
+    List<User> actual = userService.findUsers();
+    assertThat(actual).isEqualTo(user);
+    verify(userMapper).findAll();
+  }
+
+  @Test
+  public void 存在しないユーザーのIDを指定したときにエラーが返されること() {
+    doReturn(Optional.empty()).when(userMapper).findById(8);
+    assertThrows(UserNotFoundException.class, () -> {
+      userService.findUser(8);
+    });
   }
 }
