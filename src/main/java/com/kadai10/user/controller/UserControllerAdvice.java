@@ -64,9 +64,8 @@ public class UserControllerAdvice {
    * @param request HTTPリクエスト
    * @return エラーレスポンス
    */
-  @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
   @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-  public ResponseEntity<Map<String, String>> handleSQLIntegrityConstraintViolationException(
+  public ResponseEntity<Map<String, String>> handleSqlIntegrityConstraintViolationException(
       final SQLIntegrityConstraintViolationException e, final HttpServletRequest request) {
     Map<String, String> body = Map.of(
         "timestamp", ZonedDateTime.now().toString(),
