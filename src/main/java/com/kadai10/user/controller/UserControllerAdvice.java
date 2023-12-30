@@ -9,12 +9,14 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * アプリケーション内で発生する例外に対する処理を提供する. ControllerAdvice として機能するクラスです。
  * 例外処理、エラーハンドリング、および異常状態のレスポンス生成などを行います。
  */
+@ControllerAdvice
 public class UserControllerAdvice {
 
   /**
@@ -62,10 +64,9 @@ public class UserControllerAdvice {
    * @param request HTTPリクエスト
    * @return エラーレスポンス
    */
-  @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-  @ExceptionHandler(SqlIntegrityConstraintViolationException.class)
+  @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
   public ResponseEntity<Map<String, String>> handleSqlIntegrityConstraintViolationException(
-      final SqlIntegrityConstraintViolationException e, final HttpServletRequest request) {
+      final SQLIntegrityConstraintViolationException e, final HttpServletRequest request) {
     Map<String, String> body = Map.of(
         "timestamp", ZonedDateTime.now().toString(),
         "status", String.valueOf(HttpStatus.CONFLICT.value()),
