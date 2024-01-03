@@ -2,6 +2,7 @@ package com.kadai10.user.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -21,7 +22,6 @@ public class UserServiceTest {
 
   @InjectMocks
   UserService userService;
-
   @Mock
   UserMapper userMapper;
 
@@ -51,5 +51,13 @@ public class UserServiceTest {
     assertThrows(UserNotFoundException.class, () -> {
       userService.findUser(8);
     });
+  }
+
+  @Test
+  public void 正常に新規のユーザーが登録できること() {
+    User user = new User(null, "山田", "建築士");
+    doNothing().when(userMapper).insert(user);
+    assertThat(userService.insert("山田", "建築士")).isEqualTo(user);
+    verify(userMapper).insert(user);
   }
 }
