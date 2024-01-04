@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
 import com.kadai10.user.entity.User;
@@ -60,4 +61,14 @@ public class UserServiceTest {
     assertThat(userService.insert("山田", "建築士")).isEqualTo(user);
     verify(userMapper).insert(user);
   }
+
+  @Test
+  public void 新規のユーザーがすでに存在した時にエラーが返されること() {
+    User user = new User(null, "山田", "建築士");
+    doThrow(new UserNotFoundException("User already exists")).when(userMapper).insert(user);
+    assertThrows(UserNotFoundException.class, () -> {
+      userService.insert("山田", "建築士");
+    });
+  }
+
 }
