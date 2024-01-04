@@ -64,9 +64,10 @@ public class UserServiceTest {
   }
 
   @Test
-  public void 新規のユーザーがすでに存在した時にエラーが返されること() {
+  public void すでに存在する職業を再度登録時にエラーが返されること() {
     User user = new User(null, "田中", "医者");
-    doThrow(new UserAlreadyExistsException("User already exists")).when(userMapper).insert(user);
+    doThrow(new UserAlreadyExistsException("occupation already exists")).when(userMapper)
+        .insert(user);
     assertThrows(UserAlreadyExistsException.class, () -> {
       userService.insert("田中", "医者");
     });
