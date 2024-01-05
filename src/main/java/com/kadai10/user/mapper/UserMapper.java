@@ -33,6 +33,15 @@ public interface UserMapper {
   @Select("SELECT * FROM users WHERE id = #{id}")
   Optional<User> findById(int id);
 
+  /**
+   * 指定された名前に対応するユーザーを取得する.
+   *
+   * @param name 取得したいユーザーの名前
+   * @return 指定された名前に対応するユーザーを返す。存在しない場合はからのOptionalを返す。
+   */
+  @Select("SELECT * FROM users WHERE name = #{name}")
+  boolean findByName(String name);
+
 
   /**
    * 指定された職業に対応するユーザーを取得する.
@@ -41,7 +50,7 @@ public interface UserMapper {
    * @return 指定された職業に対応するユーザーを返す。存在しない場合は空のOptionalを返す。
    */
   @Select("SELECT * FROM users WHERE occupation = #{occupation}")
-  Optional<User> findByOccupation(String occupation);
+  boolean findByOccupation(String occupation);
 
   /**
    * ユーザーをデータベースに登録.
