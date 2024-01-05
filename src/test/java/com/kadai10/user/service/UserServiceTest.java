@@ -8,7 +8,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
 import com.kadai10.user.entity.User;
-import com.kadai10.user.excepention.UserAlreadyExistsException;
+import com.kadai10.user.excepention.OccupationAlreadyExistsException;
 import com.kadai10.user.excepention.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
 import java.util.List;
@@ -66,9 +66,9 @@ public class UserServiceTest {
   @Test
   public void すでに存在する職業を再度登録時にエラーが返されること() {
     User user = new User(null, "田中", "医者");
-    doThrow(new UserAlreadyExistsException("occupation already exists")).when(userMapper)
+    doThrow(new OccupationAlreadyExistsException("occupation already exists")).when(userMapper)
         .insert(user);
-    assertThrows(UserAlreadyExistsException.class, () -> {
+    assertThrows(OccupationAlreadyExistsException.class, () -> {
       userService.insert("田中", "医者");
     });
   }
