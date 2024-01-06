@@ -50,7 +50,8 @@ public interface UserMapper {
    * @return 指定された職業に対応するユーザーを返す。存在しない場合は空のOptionalを返す。
    */
   @Select("SELECT * FROM users WHERE occupation = #{occupation}")
-  boolean findByOccupation(String occupation);
+  Optional<User> findByOccupation(String occupation);
+
 
   /**
    * ユーザーをデータベースに登録.
