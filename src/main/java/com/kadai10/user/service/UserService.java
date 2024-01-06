@@ -61,17 +61,16 @@ public class UserService {
    * @param name       登録するユーザーの名前
    * @param occupation 登録するユーザーの職業
    * @return 登録されたユーザー情報
-   * @throws OccupationAlreadyExistsException 登録する名前もしくは職業が重複する場合
+   * @throws OccupationAlreadyExistsException 登録する職業が重複する場合
    */
-  public User insert(final String name, final String occupation) {
+  public User insert(final String name, final String occupation)
+      throws OccupationAlreadyExistsException {
     User user = User.createUser(name, occupation);
+    if (userMapper.findByOccupation(occupation).isPresent()) {
+      throw new OccupationAlreadyExistsException(
+          "userOccupation:" + occupation + " already exists");
+    }
     userMapper.insert(user);
-    if (userMapper.findByName(name)) {
-      throw new OccupationAlreadyExistsException("userName:" + name + "already exists");
-    }
-    if (userMapper.findByOccupation(occupation)) {
-      throw new OccupationAlreadyExistsException("userOccupation:" + occupation + "already exists");
-    }
     return user;
   }
 
