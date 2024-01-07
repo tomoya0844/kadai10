@@ -9,8 +9,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.kadai10.user.entity.User;
-import com.kadai10.user.excepention.OccupationAlreadyExistsException;
-import com.kadai10.user.excepention.UserNotFoundException;
+import com.kadai10.user.excepetion.OccupationAlreadyExistsException;
+import com.kadai10.user.excepetion.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
 import java.util.List;
 import java.util.Optional;

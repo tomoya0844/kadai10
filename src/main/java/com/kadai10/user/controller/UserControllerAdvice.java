@@ -1,7 +1,7 @@
 package com.kadai10.user.controller;
 
-import com.kadai10.user.excepention.OccupationAlreadyExistsException;
-import com.kadai10.user.excepention.UserNotFoundException;
+import com.kadai10.user.excepetion.OccupationAlreadyExistsException;
+import com.kadai10.user.excepetion.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.ZonedDateTime;
