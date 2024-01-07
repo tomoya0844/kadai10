@@ -63,8 +63,7 @@ public class UserService {
    * @return 登録されたユーザー情報
    * @throws OccupationAlreadyExistsException 登録する職業が重複する場合
    */
-  public User insert(final String name, final String occupation)
-      throws OccupationAlreadyExistsException {
+  public User insert(final String name, final String occupation) {
     User user = User.createUser(name, occupation);
     if (userMapper.findByOccupation(occupation).isPresent()) {
       throw new OccupationAlreadyExistsException(
