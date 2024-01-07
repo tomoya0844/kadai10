@@ -4,7 +4,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -66,8 +65,6 @@ public class UserServiceTest {
 
   @Test
   public void すでに存在する職業を再度登録時にエラーが返されること() {
-    UserMapper userMapper = mock(UserMapper.class);
-    UserService userService = new UserService(userMapper);
     when(userMapper.findByOccupation("医者")).thenReturn(Optional.of(new User(1, "田中", "医者")));
     assertThrows(OccupationAlreadyExistsException.class, () -> {
       userService.insert("田中", "医者");
