@@ -1,4 +1,4 @@
-package com.kadai10.user.excepetion;
+package com.kadai10.user.exception;
 
 /**
  * ユーザーが見つからない場合にスローされる例外クラスです. ユーザーが特定の条件を満たさない場合や、IDに対応するユーザーが存在しない場合に使用されます。

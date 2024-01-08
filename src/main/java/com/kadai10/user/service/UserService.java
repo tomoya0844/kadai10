@@ -2,8 +2,8 @@ package com.kadai10.user.service;
 
 import com.kadai10.user.controller.request.UserUpdateRequest;
 import com.kadai10.user.entity.User;
-import com.kadai10.user.excepetion.OccupationAlreadyExistsException;
-import com.kadai10.user.excepetion.UserNotFoundException;
+import com.kadai10.user.exception.OccupationAlreadyExistsException;
+import com.kadai10.user.exception.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
 import java.util.List;
 import java.util.Optional;
