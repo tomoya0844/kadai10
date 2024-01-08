@@ -1,0 +1,13 @@
+users:
+  - id: 1
+    name: "小山"
+    occupation: "警察官"
+  - id: 2
+    name: "北野"
+    occupation: "介護士"
+  - id: 3
+    name: "田中"
+    occupation: "看護師"
+  - id: 9
+    name: "山田"
+    occupation: "建築士"
