@@ -4,6 +4,7 @@ package com.kadai10.user.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.kadai10.user.entity.User;
 import java.util.List;
@@ -71,7 +72,7 @@ class UserMapperTest {
 
   @Test
   @DataSet(value = "datasets/users.yml")
-  @Transactional
+  @ExpectedDataSet("datasets/expectedUsers.yml")
   public void 正常に新規のユーザーが登録できること() {
     User user = new User(null, "山田", "建築士");
     userMapper.insert(user);
