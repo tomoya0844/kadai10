@@ -2,7 +2,8 @@ package com.kadai10.user.service;
 
 import com.kadai10.user.controller.request.UserUpdateRequest;
 import com.kadai10.user.entity.User;
-import com.kadai10.user.excepention.UserNotFoundException;
+import com.kadai10.user.exception.OccupationAlreadyExistsException;
+import com.kadai10.user.exception.UserNotFoundException;
 import com.kadai10.user.mapper.UserMapper;
 import java.util.List;
 import java.util.Optional;
@@ -60,9 +61,14 @@ public class UserService {
    * @param name       登録するユーザーの名前
    * @param occupation 登録するユーザーの職業
    * @return 登録されたユーザー情報
+   * @throws OccupationAlreadyExistsException 登録する職業が重複する場合
    */
   public User insert(final String name, final String occupation) {
     User user = User.createUser(name, occupation);
+    if (userMapper.findByOccupation(occupation).isPresent()) {
+      throw new OccupationAlreadyExistsException(
+          "userOccupation:" + occupation + " already exists");
+    }
     userMapper.insert(user);
     return user;
   }

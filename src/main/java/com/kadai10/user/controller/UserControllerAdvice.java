@@ -1,6 +1,7 @@
 package com.kadai10.user.controller;
 
-import com.kadai10.user.excepention.UserNotFoundException;
+import com.kadai10.user.exception.OccupationAlreadyExistsException;
+import com.kadai10.user.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.ZonedDateTime;
@@ -72,6 +73,25 @@ public class UserControllerAdvice {
         "status", String.valueOf(HttpStatus.CONFLICT.value()),
         "error", HttpStatus.CONFLICT.getReasonPhrase(),
         "message", e.getMessage() + "データが既に存在しています。新しいデータを追加できません。",
+        "path", request.getRequestURI());
+    return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+  }
+
+  /**
+   * 重複した職業が見つかった場合の例外ハンドリングメソッド.
+   *
+   * @param e       重複した職業が見つかった例外
+   * @param request HTTPリクエスト
+   * @return エラーレスポンス
+   */
+  @ExceptionHandler(OccupationAlreadyExistsException.class)
+  public ResponseEntity<Map<String, String>> handleOccupationAlreadyExistsException(
+      final OccupationAlreadyExistsException e, final HttpServletRequest request) {
+    Map<String, String> body = Map.of(
+        "timestamp", ZonedDateTime.now().toString(),
+        "status", String.valueOf(HttpStatus.CONFLICT.value()),
+        "error", HttpStatus.CONFLICT.getReasonPhrase(),
+        "message", e.getMessage() + "職業が既に存在しています。新しいデータを追加できません。",
         "path", request.getRequestURI());
     return new ResponseEntity<>(body, HttpStatus.CONFLICT);
   }
