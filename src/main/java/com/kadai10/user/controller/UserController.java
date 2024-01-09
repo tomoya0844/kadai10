@@ -73,7 +73,7 @@ public class UserController {
   @PostMapping("/users")
   public ResponseEntity<UserResponse> insert(final @RequestBody @Valid UserRequest userRequest,
       final UriComponentsBuilder uriBuilder) {
-    User user = userService.insert(userRequest.getName(), userRequest.getOccupation());
+    User user = userService.insert(userRequest.name(), userRequest.occupation());
     URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
     UserResponse body = new UserResponse(user.getName() + "を登録しました");
     return ResponseEntity.created(location).body(body);
