@@ -75,9 +75,7 @@ public class UserServiceTest {
   @Test
   public void 存在するユーザーの名前と職業の更新できること() {
     doReturn(Optional.of(new User(2, "北野", "介護士"))).when(userMapper).findById(2);
-    UserUpdateRequest.setName("三田");
-    UserUpdateRequest.setOccupation("消防士");
-    User actual = userService.updateUser(2);
+    User actual = userService.updateUser(2, new UserUpdateRequest("三田", "消防士"));
     User user = new User(2, "三田", "消防士");
     assertThat(actual).isEqualTo(user);
     verify(userMapper).findById(2);
@@ -87,8 +85,9 @@ public class UserServiceTest {
   @Test
   public void 存在するユーザーの名前のみ更新できること() {
     doReturn(Optional.of(new User(1, "小山", "警察官"))).when(userMapper).findById(1);
-    UserUpdateRequest.setName("小川");
-    User actual = userService.updateUser(1);
+    UserUpdateRequest updateRequest =
+        new UserUpdateRequest("小川", null);
+    User actual = userService.updateUser(1, updateRequest);
     User user = new User(1, "小川", "警察官");
     assertThat(actual).isEqualTo(user);
     verify(userMapper).findById(1);
@@ -98,8 +97,8 @@ public class UserServiceTest {
   @Test
   public void 存在するユーザーの職業のみ更新できること() {
     doReturn(Optional.of(new User(1, "小山", "警察官"))).when(userMapper).findById(1);
-    UserUpdateRequest.setOccupation("警備員");
-    User actual = userService.updateUser(1);
+    UserUpdateRequest updateRequest = new UserUpdateRequest(null, "警備員");
+    User actual = userService.updateUser(1, updateRequest);
     User user = new User(1, "小山", "警備員");
     assertThat(actual).isEqualTo(user);
     verify(userMapper).findById(1);

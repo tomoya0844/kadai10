@@ -80,14 +80,14 @@ public class UserService {
    * @return 更新されたユーザー情報
    * @throws UserNotFoundException 指定されたIDのユーザーが見つからない場合
    */
-  public User updateUser(final Integer id) {
+  public User updateUser(final Integer id, UserUpdateRequest updateRequest) {
     User user = userMapper.findById(id)
         .orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
-    if (UserUpdateRequest.getName() != null) {
-      user.setName(UserUpdateRequest.getName());
+    if (updateRequest.getName() != null) {
+      user.setName(updateRequest.getName());
     }
-    if (UserUpdateRequest.getOccupation() != null) {
-      user.setOccupation(UserUpdateRequest.getOccupation());
+    if (updateRequest.getOccupation() != null) {
+      user.setOccupation(updateRequest.getOccupation());
     }
     userMapper.updateUser(user);
     return user;
