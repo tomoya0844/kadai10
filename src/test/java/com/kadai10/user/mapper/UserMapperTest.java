@@ -2,6 +2,7 @@ package com.kadai10.user.mapper;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
@@ -76,5 +77,43 @@ class UserMapperTest {
   public void 正常に新規のユーザーが登録できること() {
     User user = new User(null, "山田", "建築士");
     userMapper.insert(user);
+  }
+
+  @Test
+  @DataSet(value = "datasets/users.yml")
+  @ExpectedDataSet("datasets/updateTestUsers.yml")
+  @Transactional
+  public void 正常にユーザーの名前と職業が更新できること() {
+    User user = new User(3, "小池", "自営業");
+    userMapper.updateUser(user);
+  }
+
+  @Test
+  @DataSet(value = "datasets/users.yml")
+  @ExpectedDataSet("datasets/updateTestUserName.yml")
+  @Transactional
+  public void 正常にユーザーの名前が更新できること() {
+    User user = new User(1, "広瀬", "警察官");
+    userMapper.updateUser(user);
+  }
+
+  @Test
+  @DataSet(value = "datasets/users.yml")
+  @ExpectedDataSet("datasets/updateTestUserOccupation.yml")
+  @Transactional
+  public void 正常にユーザーの職業が更新できること() {
+    User user = new User(2, "北野", "レストランオーナー");
+    userMapper.updateUser(user);
+  }
+
+  @Test
+  @DataSet(value = "datasets/users.yml")
+  @ExpectedDataSet("datasets/users.yml")
+  @Transactional
+  public void すでに存在する職業に更新時にエラーが返されること() {
+    User user = new User(2, "北野", "警察官");
+    assertThrows(RuntimeException.class, () -> {
+      userMapper.updateUser(user);
+    });
   }
 }
