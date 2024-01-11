@@ -73,7 +73,7 @@ public class UserController {
   @PostMapping("/users")
   public ResponseEntity<UserResponse> insert(final @RequestBody @Valid UserRequest userRequest,
       final UriComponentsBuilder uriBuilder) {
-    User user = userService.insert(userRequest.getName(), userRequest.getOccupation());
+    User user = userService.insert(userRequest.name(), userRequest.occupation());
     URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
     UserResponse body = new UserResponse(user.getName() + "を登録しました");
     return ResponseEntity.created(location).body(body);
@@ -91,7 +91,7 @@ public class UserController {
   @PatchMapping("/users/{id}")
   public ResponseEntity<UserResponse> updateUser(final @PathVariable @Valid Integer id,
       final @RequestBody UserUpdateRequest updateRequest, final UriComponentsBuilder uriBuilder) {
-    User user = userService.updateUser(id);
+    User user = userService.updateUser(id, updateRequest);
     URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
     UserResponse body = new UserResponse(user.getName() + "を更新しました");
     return ResponseEntity.created(location).body(body);
