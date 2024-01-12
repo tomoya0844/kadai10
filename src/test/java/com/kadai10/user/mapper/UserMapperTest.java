@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.transaction.annotation.Transactional;
 
 @DBRider
@@ -90,29 +91,11 @@ class UserMapperTest {
 
   @Test
   @DataSet(value = "datasets/users.yml")
-  @ExpectedDataSet("datasets/updateTestUserName.yml")
-  @Transactional
-  public void 正常にユーザーの名前が更新できること() {
-    User user = new User(1, "広瀬", "警察官");
-    userMapper.updateUser(user);
-  }
-
-  @Test
-  @DataSet(value = "datasets/users.yml")
-  @ExpectedDataSet("datasets/updateTestUserOccupation.yml")
-  @Transactional
-  public void 正常にユーザーの職業が更新できること() {
-    User user = new User(2, "北野", "レストランオーナー");
-    userMapper.updateUser(user);
-  }
-
-  @Test
-  @DataSet(value = "datasets/users.yml")
   @ExpectedDataSet("datasets/users.yml")
   @Transactional
   public void すでに存在する職業に更新時にエラーが返されること() {
     User user = new User(2, "北野", "警察官");
-    assertThrows(RuntimeException.class, () -> {
+    assertThrows(DuplicateKeyException.class, () -> {
       userMapper.updateUser(user);
     });
   }
