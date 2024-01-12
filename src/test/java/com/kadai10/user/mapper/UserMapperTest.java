@@ -93,7 +93,7 @@ class UserMapperTest {
   @DataSet(value = "datasets/users.yml")
   @ExpectedDataSet("datasets/users.yml")
   @Transactional
-  public void すでに存在する職業に更新時にエラーが返されること() {
+  public void すでに存在する職業への更新時にエラーが返されること() {
     User user = new User(2, "北野", "警察官");
     assertThrows(DuplicateKeyException.class, () -> {
       userMapper.updateUser(user);
