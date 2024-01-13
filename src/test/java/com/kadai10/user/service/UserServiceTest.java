@@ -126,7 +126,7 @@ public class UserServiceTest {
     doReturn(Optional.empty()).when(userMapper).findById(100);
     assertThrows(UserNotFoundException.class, () -> {
       userService.deleteUser(100);
-    });
+    }, "指定されたユーザーが見つかりません");
     verify(userMapper).findById(100);
   }
 }
