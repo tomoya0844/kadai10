@@ -114,7 +114,7 @@ public class UserServiceTest {
   }
 
   @Test
-  public void 存在IDを指定して削除できること() {
+  public void 存在するIDを指定して削除できること() {
     doReturn(Optional.of(new User(1, "小山", "警察官"))).when(userMapper).findById(1);
     userService.deleteUser(1);
     verify(userMapper).findById(1);
