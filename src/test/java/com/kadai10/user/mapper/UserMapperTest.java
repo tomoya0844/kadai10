@@ -99,4 +99,20 @@ class UserMapperTest {
       userMapper.updateUser(user);
     });
   }
+
+  @Test
+  @DataSet(value = "datasets/users.yml")
+  @ExpectedDataSet("datasets/deleteTestUser.yml")
+  @Transactional
+  public void 存在するIDを指定して削除できること() {
+    userMapper.deleteUser(3);
+  }
+
+  @Test
+  @DataSet(value = "datasets/users.yml")
+  @ExpectedDataSet("datasets/users.yml")
+  @Transactional
+  public void 存在しないIDを指定した時にユーザーが削除されないこと() {
+    userMapper.findById(4);
+  }
 }
