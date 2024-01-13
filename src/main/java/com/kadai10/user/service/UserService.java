@@ -73,24 +73,30 @@ public class UserService {
     return user;
   }
 
+
   /**
    * ユーザー情報を更新するメソッド.
    *
    * @param id 更新するユーザーのID
    * @return 更新されたユーザー情報
-   * @throws UserNotFoundException 指定されたIDのユーザーが見つからない場合
+   * @throws UserNotFoundException            指定されたIDのユーザーが見つからない場合
+   * @throws OccupationAlreadyExistsException 職業が重複する場合
    */
   public User updateUser(final Integer id, UserUpdateRequest updateRequest) {
-    User user = userMapper.findById(id)
-        .orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
-    if (updateRequest.getName() != null) {
-      user.setName(updateRequest.getName());
+    try {
+      User user = userMapper.findById(id)
+          .orElseThrow(() -> new UserNotFoundException("userID:" + id + "not fond"));
+      if (updateRequest.getName() != null) {
+        user.setName(updateRequest.getName());
+      }
+      if (updateRequest.getOccupation() != null) {
+        user.setOccupation(updateRequest.getOccupation());
+      }
+      userMapper.updateUser(user);
+      return user;
+    } catch (OccupationAlreadyExistsException e) {
+      throw new OccupationAlreadyExistsException("職業が重複している");
     }
-    if (updateRequest.getOccupation() != null) {
-      user.setOccupation(updateRequest.getOccupation());
-    }
-    userMapper.updateUser(user);
-    return user;
   }
 
   /**
