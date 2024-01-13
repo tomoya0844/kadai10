@@ -77,5 +77,5 @@ public interface UserMapper {
    * @param id 削除するユーザーのid
    */
   @Delete("DELETE FROM users WHERE id = #{id}")
-  void deleteUser(User id);
+  void deleteUser(int id);
 }
