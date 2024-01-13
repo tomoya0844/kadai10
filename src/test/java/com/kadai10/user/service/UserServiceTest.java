@@ -112,4 +112,21 @@ public class UserServiceTest {
       userService.insert("田中", "医者");
     });
   }
+
+  @Test
+  public void 存在IDを指定して削除できること() {
+    doReturn(Optional.of(new User(1, "小山", "警察官"))).when(userMapper).findById(1);
+    userService.deleteUser(1);
+    verify(userMapper).findById(1);
+    verify(userMapper).deleteUser(1);
+  }
+
+  @Test
+  public void 存在しないIDを指定した時にエラーが返ること() {
+    doReturn(Optional.empty()).when(userMapper).findById(100);
+    assertThrows(UserNotFoundException.class, () -> {
+      userService.deleteUser(100);
+    });
+    verify(userMapper).findById(100);
+  }
 }
