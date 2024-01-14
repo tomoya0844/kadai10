@@ -1,0 +1,7 @@
+users:
+  - id: 1
+    name: "小山"
+    occupation: "警察官"
+  - id: 2
+    name: "北野"
+    occupation: "介護士"
