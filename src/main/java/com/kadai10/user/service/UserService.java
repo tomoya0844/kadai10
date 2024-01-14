@@ -109,7 +109,7 @@ public class UserService {
   public User deleteUser(final Integer id) {
     User user = userMapper.findById(id)
         .orElseThrow(() -> new UserNotFoundException("userID:" + id + " not found"));
-    userMapper.deleteUser(user);
+    userMapper.deleteUser(id);
     return user;
   }
 }
